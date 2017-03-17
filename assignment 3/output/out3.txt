@@ -1,0 +1,2 @@
+time taken is 0.005 for 9 nodes and 9 edges and 81 is product of vertices and edges.
+time taken is 0.006 for 10 nodes and 8 edges and 80 is product of vertices and edges.

@@ -1,0 +1,6 @@
+time taken is 9.586 for 298 nodes and 928 edges and 276544 is product of vertices and edges.
+time taken is 1551.94 for 1578 nodes and 29566 edges and 46655148 is product of vertices and edges.
+time taken is 1546.57 for 1578 nodes and 29566 edges and 46655148 is product of vertices and edges.
+time taken is 1547.01 for 1578 nodes and 29566 edges and 46655148 is product of vertices and edges.
+time taken is 1540.51 for 1578 nodes and 29566 edges and 46655148 is product of vertices and edges.
+time taken is 1536.48 for 1578 nodes and 29566 edges and 46655148 is product of vertices and edges.

@@ -1,0 +1,4 @@
+time taken is 2495.42 for 1826 nodes and 41042 edges and 74942692 is product of vertices and edges.
+time taken is 111.136 for 656 nodes and 5140 edges and 3371840 is product of vertices and edges.
+time taken is 1745.12 for 2310 nodes and 22744 edges and 52538640 is product of vertices and edges.
+time taken is 26.156 for 566 nodes and 1404 edges and 794664 is product of vertices and edges.

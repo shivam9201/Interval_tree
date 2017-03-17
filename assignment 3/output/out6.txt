@@ -1,0 +1,6 @@
+time taken is 0.117 for 20 nodes and 54 edges and 1080 is product of vertices and edges.
+time taken is 10.406 for 78 nodes and 1231 edges and 96018 is product of vertices and edges.
+time taken is 0.851 for 94 nodes and 95 edges and 8930 is product of vertices and edges.
+time taken is 2.943 for 68 nodes and 462 edges and 31416 is product of vertices and edges.
+time taken is 0.624 for 28 nodes and 242 edges and 6776 is product of vertices and edges.
+time taken is 18.519 for 88 nodes and 2824 edges and 248512 is product of vertices and edges.

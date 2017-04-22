@@ -1,23 +1,24 @@
 #include <bits/stdc++.h>
+#define ll long long int
 using namespace std;
 
-struct point{
+struct pnt{
 	double x,y;
-	point(double X=0, double Y=0) : x(X), y(Y){}
+	pnt(double X=0, double Y=0) : x(X), y(Y){}
 };
 
-double area(point p1, point p2, point p3){
+double area(pnt p1, pnt p2, pnt p3){
 	p2.x -= p3.x;	p2.y -= p3.y;
 	p1.x -= p3.x;	p1.y -= p3.y;
 	return 0.5*(p1.x*p2.y-p1.y*p2.x);
 }
 
-bool compare(const point &a, const point &b, const point &c){
+bool compare(const pnt &a, const pnt &b, const pnt &c){
 	return area(a,b,c)>0;
 }
 
-point leftMost(vector<point> &s){
-	point left = s[0];
+pnt leftMost(vector<pnt> &s){
+	pnt left = s[0];
 	for(int i=1; i<s.size(); i++){
 		if(s[i].x>left.x)	continue;
 		if(s[i].x==left.x&&s[i].y>left.y)	continue;
@@ -26,7 +27,7 @@ point leftMost(vector<point> &s){
 	return left;
 }
 
-int lowerMost(vector<point> &s){
+int lowerMost(vector<pnt> &s){
 	int j=0;
 	for(int i=1; i<s.size(); i++){
 		if(s[i].y>s[j].y)	continue;
@@ -36,27 +37,27 @@ int lowerMost(vector<point> &s){
 	return j;
 }
 
-vector<point> quick(point a, point b, vector<point> &s){
+vector<pnt> quick(pnt a, pnt b, vector<pnt> &s){
 	if(s.size()<2)	return s;
-	vector<point> p;
+	vector<pnt> p;
 	int j=0;
 	for(int i=1; i<s.size(); i++)	if(area(a,b,s[i])>area(a,b,s[j]))	j=i;
-	point farthest = s[j];
-	vector<point> t;
+	pnt farthest = s[j];
+	vector<pnt> t;
 	for(int i=0; i<s.size(); i++)	if(area(farthest,b,s[i])>0)	t.push_back(s[i]);
 	p = quick(farthest,b,t);
 	p.push_back(farthest);
 	t.clear();
 	for(int i=0; i<s.size(); i++)	if(area(a,farthest,s[i])>0)	t.push_back(s[i]);
-	vector<point> ans = quick(a,farthest,t);
+	vector<pnt> ans = quick(a,farthest,t);
 	p.insert(p.end(),ans.begin(),ans.end());
 	t.clear();
 	return p;
 }
-vector<point> quickHull(vector<point> &s){
+vector<pnt> quickHull(vector<pnt> &s){
 	int n = s.size();
 	if(n<4)	return s;
-	vector<point> p;
+	vector<pnt> p;
 	int j = lowerMost(s);
 	swap(s[j],s.back());
 	p.push_back(s.back());
@@ -66,15 +67,15 @@ vector<point> quickHull(vector<point> &s){
 	swap(s[j],s.back());
 	p.push_back(s.back());
 	s.pop_back();
-	vector<point> ans = quick(p[0],p[1],s);
+	vector<pnt> ans = quick(p[0],p[1],s);
 	p.insert(p.end(),ans.begin(),ans.end());
 	return p;
 }
 int main() {
 	int n=0;
 	cin>>n;
-	vector<point> s;
-	point temp;
+	vector<pnt> s;
+	pnt temp;
 	while(n--){
 		cin>>temp.x>>temp.y;
 		s.push_back(temp);

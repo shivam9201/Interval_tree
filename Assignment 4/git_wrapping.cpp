@@ -1,21 +1,20 @@
 #include <bits/stdc++.h>
+#define ll long long int
 using namespace std;
  
-#define INF 100005
- 
-struct Point{
+struct pnt{
         int x;
         int y;
 };
  
-int fo(Point p, Point q, Point r){
+int angle(pnt p, pnt q, pnt r){
     int sl = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
     if (sl == 0)
         return 0; 
     return (sl > 0) ? 1 : 2;
 }
  
-void convexHull(Point points[], int n){
+void convexHull(pnt points[], int n){
     if (n < 3)
         return;
     int next[n];
@@ -29,7 +28,7 @@ void convexHull(Point points[], int n){
     do{      
         q = (p + 1) % n;
         for (int i = 0; i < n; i++)
-            if (fo(points[p], points[i], points[q]) == 2)
+            if (angle(points[p], points[i], points[q]) == 2)
                 q = i; 
         next[p] = q; // Add q to result as a next point of p
         p = q; 
@@ -50,7 +49,7 @@ int main(){
     int n;
 	cin>>n;
 	
-	Point points[n];
+        pnt points[n];
 	
 	for(int i=0; i<n; i++){
 		int x, y;

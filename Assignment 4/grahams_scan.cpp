@@ -1,87 +1,88 @@
 #include <bits/stdc++.h>
+#define ll long long int
 using namespace std;
  
-struct Point{
+struct pnt{
     int x, y;
 };
-Point p0;
-Point secondtop(stack<Point> &S){
-    Point p = S.top();
+pnt p0;
+pnt secondtop(stack<pnt> &S){
+    pnt p = S.top();
     S.pop();
-    Point res = S.top();
+    pnt res = S.top();
     S.push(p);
     return res;
 }
  
-int swap(Point &p1, Point &p2){
-    Point temp = p1;
+int swap(pnt &p1, pnt &p2){
+    pnt temp = p1;
     p1 = p2;
     p2 = temp;
 }
 
-int Distance(Point p1, Point p2){
+int SquareDistance(pnt p1, pnt p2){
     return (p1.x - p2.x)*(p1.x - p2.x) +
           (p1.y - p2.y)*(p1.y - p2.y);
 }
  
-int fo(Point p, Point q, Point r){
+int angle(pnt p, pnt q, pnt r){
     int sl = (q.y - p.y) * (r.x - q.x) -
               (q.x - p.x) * (r.y - q.y); 
     if (sl == 0) return 0;  
     return (sl > 0)? 1: 2; 
 } 
 
-bool comp(const Point& p1, const Point& p2){
-   int o = findOrientation(p0, p1, p2);
+bool comp(const pnt& p1, const pnt& p2){
+   int o = angle(p0, p1, p2);
    if (o == 0)
      return (SquareDistance(p0, p2) >=  SquareDistance(p0, p1));
    return (o == 2);
 }
  
 
-void convexHull(Point points[], int n){
-   int ymin = points[0].y, min = 0;
+void convexHull(pnt pnts[], int n){
+   int ymin = pnts[0].y, min = 0;
    for (int i = 1; i < n; i++)
    {
-     int y = points[i].y;
+     int y = pnts[i].y;
  
      if ((y < ymin) || (ymin == y &&
-         points[i].x < points[min].x))
-        ymin = points[i].y, min = i;
+         pnts[i].x < pnts[min].x))
+        ymin = pnts[i].y, min = i;
    }
  
-   swap(points[0], points[min]);
+   swap(pnts[0], pnts[min]);
 
-   p0 = points[0];
-   sort(points+1, points + n,  comp);
+   p0 = pnts[0];
+   sort(pnts+1, pnts + n,  comp);
  
    int m = 1; // Initialize size of modified array
    for (int i=1; i<n; i++){
-       while (i < n-1 && findOrientation(p0, points[i],
-                                    points[i+1]) == 0)
+       while (i < n-1 && angle(p0, pnts[i],
+                                    pnts[i+1]) == 0)
           i++;
  
  
-       points[m] = points[i];
+       pnts[m] = pnts[i];
        m++; 
    }
  
    if (m < 3) return;
  
-   stack<Point> S;
-   S.push(points[0]);
-   S.push(points[1]);
-   S.push(points[2]);
+   stack<pnt> S;
+   S.push(pnts[0]);
+   S.push(pnts[1]);
+   S.push(pnts[2]);
    for (int i = 3; i < m; i++){
-      while (findOrientation(secondtop(S), S.top(), points[i]) != 2)
+      while (angle(secondtop(S), S.top(), pnts[i]) != 2)
          S.pop();
-      S.push(points[i]);
+      S.push(pnts[i]);
    }
  
    
    while (!S.empty())
    {
-       Point p = S.top();
+       pnt p = S.top();
        cout << "(" << p.x << ", " << p.y <<")" << endl;
        S.pop();
    }
@@ -92,13 +93,13 @@ int main(){
 	int n;
 	cin>>n;
 	
-    Point points[n];
+    pnt pnts[n];
     
     for(int i=0; i<n; i++){
     	int x, y;
     	cin>>x>>y;
-    	points[i] = {x,y};
+    	pnts[i] = {x,y};
     }
-    convexHull(points, n);
+    convexHull(pnts, n);
     return 0;
 }
